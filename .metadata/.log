@@ -216,3 +216,45 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/hyunl
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-28 23:21:47.494
 !MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-03-28 23:48:54.727
+!MESSAGE Indexed 'MyFirstLED' (23 sources, 148 headers) in 5.7 sec: 12,858 declarations; 47,168 references; 1 unresolved inclusions; 92 syntax errors; 240 unresolved names (0.4%)
+!SESSION 2026-03-28 23:51:18.087 -----------------------------------------------
+eclipse.buildId=Version 2.1.1
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/hyunlee/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/hyunlee/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-28 23:51:34.865
+!MESSAGE Log4j2 initialized with config file /Users/hyunlee/Desktop/Lab/C-Practice/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-28 23:51:42.397
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2026-03-28 23:56:58.127 -----------------------------------------------
+eclipse.buildId=Version 2.1.1
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/hyunlee/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/hyunlee/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-28 23:57:09.321
+!MESSAGE Log4j2 initialized with config file /Users/hyunlee/Desktop/Lab/C-Practice/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-28 23:57:16.264
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2026-03-31 23:06:29.102 -----------------------------------------------
+eclipse.buildId=Version 2.1.1
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/hyunlee/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/hyunlee/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-31 23:06:42.467
+!MESSAGE Log4j2 initialized with config file /Users/hyunlee/Desktop/Lab/C-Practice/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-31 23:06:51.960
+!MESSAGE Started RMI Server, listening on port 41337
