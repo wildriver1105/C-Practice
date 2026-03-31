@@ -96,9 +96,22 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  // 1. GPIOA에 클럭(전원) 공급 (RCC_AHB1ENR 주소: 0x40023830)
+	  // 0번 비트를 1로 만들어서 GPIOA를 활성화합니다.
+	  *(uint32_t *)0x40023830 |= (1 << 0);
 
-    HAL_Delay(1000);
+	  // 2. PA5 핀을 '출력(Output)' 모드로 설정 (GPIOA_MODER 주소: 0x40020000)
+	  // 10번, 11번 비트 중 10번만 1로 만듭니다. (01 = Output)
+	  *(uint32_t *)0x40020000 &= ~(3 << 10); // 초기화
+	  *(uint32_t *)0x40020000 |= (1 << 10);  // 출력 설정
+
+	  // 3. PA5 핀에 전기 신호 보내기 (GPIOA_ODR 주소: 0x40020014)
+	  // 5번 비트를 1로 만들면 LED ON, 0으로 만들면 OFF
+	  *(uint32_t *)0x40020014 |= (1 << 5);  // LED ON
+	  HAL_Delay(500);                       // 잠시 대기
+
+	  *(uint32_t *)0x40020014 &= ~(1 << 5); // LED OFF
+	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
