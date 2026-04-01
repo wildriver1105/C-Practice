@@ -21,31 +21,16 @@
 #include "usart.h"
 #include "gpio.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+typedef struct {
+	uint32_t MODER;
+	uint32_t OTYPER;
+	uint32_t OSPEEDR;
+	uint32_t PUPDR;
+	uint32_t IDR;
+	uint32_t ODR;
+} MY_GPIO_TypeDef;
 
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
+#define MY_GPIOA ((MY_GPIO_TypeDef *)0x40020000)
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -102,12 +87,12 @@ int main(void)
 
 	  // 2. PA5 핀을 '출력(Output)' 모드로 설정 (GPIOA_MODER 주소: 0x40020000)
 	  // 10번, 11번 비트 중 10번만 1로 만듭니다. (01 = Output)
-	  *(uint32_t *)0x40020000 &= ~(3 << 10); // 초기화
-	  *(uint32_t *)0x40020000 |= (1 << 10);  // 출력 설정
+	  MY_GPIOA->MODER &= ~(3 << 10); // 초기화
+	  MY_GPIOA->MODER |= (1 << 10);  // 출력 설정
 
 	  // 3. PA5 핀에 전기 신호 보내기 (GPIOA_ODR 주소: 0x40020014)
 	  // 5번 비트를 1로 만들면 LED ON, 0으로 만들면 OFF
-	  *(uint32_t *)0x40020014 |= (1 << 5);  // LED ON
+	  MY_GPIOA->ODR |= (1 << 5);  // LED ON
 	  HAL_Delay(500);                       // 잠시 대기
 
 	  *(uint32_t *)0x40020014 &= ~(1 << 5); // LED OFF
