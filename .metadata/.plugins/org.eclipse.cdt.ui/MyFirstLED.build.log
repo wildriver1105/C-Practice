@@ -1,10 +1,10 @@
-23:31:48 **** Incremental Build of configuration Debug for project MyFirstLED ****
+00:06:46 **** Incremental Build of configuration Debug for project MyFirstLED ****
 make -j15 all 
 arm-none-eabi-size  MyFirstLED.elf 
    text	   data	    bss	    dec	    hex	filename
-   7872	     12	   1644	   9528	   2538	MyFirstLED.elf
+   7772	     12	   1644	   9428	   24d4	MyFirstLED.elf
 Finished building: default.size.stdout
  
 
-23:31:48 Build Finished. 0 errors, 0 warnings. (took 163ms)
+00:06:46 Build Finished. 0 errors, 0 warnings. (took 330ms)
 
