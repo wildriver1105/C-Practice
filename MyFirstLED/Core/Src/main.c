@@ -35,14 +35,21 @@ typedef struct {
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
+void Control_LED(uint8_t on_off) {
+    if (on_off) {
+        MY_GPIOA->ODR |= (1 << 5);  // 주소에 1 쓰기
+    } else {
+        MY_GPIOA->ODR &= ~(1 << 5); // 주소에 0 쓰기
+    }
+}
 
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
+// 버튼 상태 확인 함수 (입력 추상화)
+uint8_t Is_BlueButton_Pressed(void) {
+    // 0(눌림)일 때 1(true)을 반환하도록 로직 반전
+    if (!(MY_GPIOC->IDR & (1 << 13))) return 1;
+    else return 0;
+}
 
 /**
   * @brief  The application entry point.
@@ -86,10 +93,10 @@ int main(void)
 	  *(uint32_t *)0x40023830 |= (1 << 0) | (1 << 2);
 
 	  // IDR(Input Data Register)의 13번 비트 확인
-	  if (!(MY_GPIOC->IDR & (1 << 13))) {
-		  MY_GPIOA->ODR |= (1 << 5);  // 누르면 켬
+	  if (Is_BlueButton_Pressed()) {
+		  Control_LED(1);
 	  } else {
-		  MY_GPIOA->ODR &= ~(1 << 5); // 떼면 끔
+		  Control_LED(0);
 	  }
   }
   /* USER CODE END 3 */
