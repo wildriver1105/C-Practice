@@ -83,7 +83,7 @@ int main(void)
   while (1)
   {
 	  // GPIOC 전원 켜기 (RCC의 2번 비트)
-	  *(uint32_t *)0x40023830 |= (1 << 2);
+	  *(uint32_t *)0x40023830 |= (1 << 0) | (1 << 2);
 
 	  // IDR(Input Data Register)의 13번 비트 확인
 	  if (!(MY_GPIOC->IDR & (1 << 13))) {
