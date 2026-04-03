@@ -22,15 +22,16 @@
 #include "gpio.h"
 
 typedef struct {
-	uint32_t MODER;
-	uint32_t OTYPER;
-	uint32_t OSPEEDR;
-	uint32_t PUPDR;
-	uint32_t IDR;
-	uint32_t ODR;
+	volatile uint32_t MODER;
+	volatile uint32_t OTYPER;
+	volatile uint32_t OSPEEDR;
+	volatile uint32_t PUPDR;
+	volatile uint32_t IDR;
+	volatile uint32_t ODR;
 } MY_GPIO_TypeDef;
 
 #define MY_GPIOA ((MY_GPIO_TypeDef *)0x40020000)
+#define MY_GPIOC ((MY_GPIO_TypeDef *)0x40020800)
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -81,22 +82,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // 1. GPIOA에 클럭(전원) 공급 (RCC_AHB1ENR 주소: 0x40023830)
-	  // 0번 비트를 1로 만들어서 GPIOA를 활성화합니다.
-	  *(uint32_t *)0x40023830 |= (1 << 0);
+	  // GPIOC 전원 켜기 (RCC의 2번 비트)
+	  *(uint32_t *)0x40023830 |= (1 << 2);
 
-	  // 2. PA5 핀을 '출력(Output)' 모드로 설정 (GPIOA_MODER 주소: 0x40020000)
-	  // 10번, 11번 비트 중 10번만 1로 만듭니다. (01 = Output)
-	  MY_GPIOA->MODER &= ~(3 << 10); // 초기화
-	  MY_GPIOA->MODER |= (1 << 10);  // 출력 설정
-
-	  // 3. PA5 핀에 전기 신호 보내기 (GPIOA_ODR 주소: 0x40020014)
-	  // 5번 비트를 1로 만들면 LED ON, 0으로 만들면 OFF
-	  MY_GPIOA->ODR |= (1 << 5);  // LED ON
-	  HAL_Delay(500);                       // 잠시 대기
-
-	  *(uint32_t *)0x40020014 &= ~(1 << 5); // LED OFF
-	  HAL_Delay(500);
+	  // IDR(Input Data Register)의 13번 비트 확인
+	  if (!(MY_GPIOC->IDR & (1 << 13))) {
+		  MY_GPIOA->ODR |= (1 << 5);  // 누르면 켬
+	  } else {
+		  MY_GPIOA->ODR &= ~(1 << 5); // 떼면 끔
+	  }
   }
   /* USER CODE END 3 */
 }
