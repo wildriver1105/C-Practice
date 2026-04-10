@@ -6,7 +6,7 @@ int main() {
     const char *msg = "System Deep Dive starts now!\n";
 
     // 1. 파일 열기
-    int fd = open("log.txt", O_WRONLY | O_CREAT, O_TRUNC, 0644);
+    int fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
     if (fd == -1) return 1;
 
