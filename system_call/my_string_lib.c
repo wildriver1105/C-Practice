@@ -19,3 +19,15 @@ char my_strcpy(char *dest, const char *src) {
     *dest = '\0';       // 마지막에 NULL 문자를 추가
     return *ptr;
 }
+
+int main() {
+    char source[] = "Test String";
+    char destination[50];
+
+    printf("원본 문자열 길이: %zu\n", my_strlen(source));
+
+    my_strcpy(destination, source);
+    printf("복사된 문자열: %s\n", destination);
+
+    return 0;
+}
