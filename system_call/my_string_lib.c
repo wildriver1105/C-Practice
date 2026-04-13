@@ -9,7 +9,7 @@ size_t my_strlen(const char *s) {
     return p - s;           // 최종 주소에서 시작 주소를 빼면 길이가 나옴
 }
 
-char my_strcpy(char *dest, const char *src) {
+char *my_strcpy(char *dest, const char *src) {
     char *ptr = dest;
     while (*src != '\0') {
         *dest = *src;   // src의 내용을 dest에 복사 (값을 복사)
@@ -17,7 +17,7 @@ char my_strcpy(char *dest, const char *src) {
         src++;
     }
     *dest = '\0';       // 마지막에 NULL 문자를 추가
-    return *ptr;
+    return ptr;
 }
 
 int main() {
