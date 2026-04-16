@@ -20,26 +20,27 @@ char *my_strcpy(char *dest, const char *src) {
     return ptr;
 }
 
-char *my_strrev(const char *c) {
-    const char *source = c;
-    int length = my_strlen(source);
-    char rev[length];
-    for (int i = 0; i < length; i++) {
-        if (*source + length - 1 == "\0") continue;
-        rev[i] = *source + length - 1 - i;
+char *my_strrev(char *s) {
+    if (!s) return NULL; // NULL 체크는 습관입니다.
+
+    size_t len = my_strlen(s);
+    for (size_t i = 0; i < len / 2; i++) {
+        // 포인터 연산을 이용한 Swap 실습
+        char temp = *(s + i);
+        *(s + i) = *(s + len - 1 - i);
+        *(s + len - 1 - i) = temp;
     }
-    rev[length] = '\0';
-    return rev;
+    return s;
 }
 
 int main() {
     char source[] = "Test String";
     char destination[50];
 
-    printf("원본 문자열 길이: %zu\n", my_strlen(source));
+    // printf("원본 문자열 길이: %zu\n", my_strlen(source));
 
     my_strcpy(destination, source);
-    printf("복사된 문자열: %s\n", destination);
+    // printf("복사된 문자열: %s\n", destination);
 
     printf("반전된 문자열: %s\n", my_strrev(source));
 
