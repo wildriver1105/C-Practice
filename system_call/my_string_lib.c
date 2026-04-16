@@ -20,6 +20,18 @@ char *my_strcpy(char *dest, const char *src) {
     return ptr;
 }
 
+char *my_strrev(const char *c) {
+    const char *source = c;
+    int length = my_strlen(source);
+    char rev[length];
+    for (int i = 0; i < length; i++) {
+        if (*source + length - 1 == "\0") continue;
+        rev[i] = *source + length - 1 - i;
+    }
+    rev[length] = '\0';
+    return rev;
+}
+
 int main() {
     char source[] = "Test String";
     char destination[50];
@@ -28,6 +40,8 @@ int main() {
 
     my_strcpy(destination, source);
     printf("복사된 문자열: %s\n", destination);
+
+    printf("반전된 문자열: %s\n", my_strrev(source));
 
     return 0;
 }
