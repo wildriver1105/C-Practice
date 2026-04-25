@@ -14,8 +14,18 @@ KeyStorage* init_storage (int initial_capacity) {
 int add_key(KeyStorage *storage, int id, const char *label, const char *secret) {
     // 용량이 꽉 찼을 때
     if (storage->count >= storage->capacity) {
-        printf("로그: 용량 부족! 확장이 필요합니다.\n");
-        return -1;
+        int new_capacity = storage->capacity * 2;
+        printf("\n[시스템 로그] 용량 초과! 확장 중: %d -> %d\n",storage->capacity, new_capacity);
+
+        CryptoKey *new_keys = (CryptoKey *)realloc(storage->keys, sizeof(CryptoKey) * new_capacity);
+
+        if (new_keys == NULL) {
+            printf("[에러] 메모리 확장 실패!\n");
+            return -1;
+        }
+
+        storage->keys = new_keys;
+        storage->capacity = new_capacity;
     }
 
     // 새로운 키 데이터 채우기
