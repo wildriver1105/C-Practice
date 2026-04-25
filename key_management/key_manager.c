@@ -43,7 +43,7 @@ int add_key(KeyStorage *storage, int id, const char *label, const char *secret) 
 
 void print_all_keys(const KeyStorage *storage) {
     printf("\n-- [Key Storage Report] ---\n");
-    for (int i = 0; i< storage->count; i++) {
+    for (int i = 0; i < storage->count; i++) {
         printf("[%d] Label: %-15s | Address: %p\n", storage->keys[i].id, storage->keys[i].label, (void *)&storage->keys[i]);
     }
 }
