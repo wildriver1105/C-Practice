@@ -57,3 +57,20 @@ void free_storage(KeyStorage *storage) {
     free(storage);
     printf("\n로그: 모든 메모리가 안전하게 소거되었습니다.\n");
 }
+
+void saveKeyFile(KeyStorage storage) {
+    FILE *file = fopen("keys.txt", "w");
+
+    if (file == NULL) {
+        printf("[에러] 파일 열기 실패!\n");
+        return;
+    }
+
+    for (int i = 0; i < storage.count; i++) {
+        fprintf(file, "%d,%s,%s\n", storage.keys[i].id, storage.keys[i].label, storage.keys[i].secret_key);
+    }
+
+    fclose(file);
+    printf("[로그] 키 정보가 keys.txt에 저장되었습니다.\n");
+    return;
+}

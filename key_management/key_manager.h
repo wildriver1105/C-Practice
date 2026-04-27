@@ -18,6 +18,7 @@ typedef struct {
 KeyStorage* init_storage(int initial_capacity);
 int add_key(KeyStorage *storage, int id, const char *label, const char *secret);
 void print_all_keys(const KeyStorage *storage);
+void saveKeyFile(KeyStorage storage);
 void free_storage(KeyStorage *storage);
 
 #endif

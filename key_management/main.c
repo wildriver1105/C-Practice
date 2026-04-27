@@ -10,6 +10,8 @@ int main() {
 
     print_all_keys(my_storage);
 
+    saveKeyFile(*my_storage);
+
     free_storage(my_storage);
 
     return 0;
