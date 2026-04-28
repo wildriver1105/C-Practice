@@ -48,16 +48,6 @@ void print_all_keys(const KeyStorage *storage) {
     }
 }
 
-void free_storage(KeyStorage *storage) {
-    if (!storage) return;
-    for (int i = 0; i < storage->count; i++) {
-        free(storage->keys[i].secret_key);
-    }
-    free(storage->keys);
-    free(storage);
-    printf("\n로그: 모든 메모리가 안전하게 소거되었습니다.\n");
-}
-
 void saveKeyFile(KeyStorage storage) {
     FILE *file = fopen("keys.txt", "w");
 
@@ -73,4 +63,30 @@ void saveKeyFile(KeyStorage storage) {
     fclose(file);
     printf("[로그] 키 정보가 keys.txt에 저장되었습니다.\n");
     return;
+}
+
+void saveKeyFileBinary(const KeyStorage *storage) {
+    FILE *file = fopen("keys.bin", "wb");
+
+    if (file == NULL) {
+        printf("[에러] 파일 열기 실패!\n");
+        return;
+    }
+
+    fwrite(&storage->count, sizeof(int), 1, file);
+
+    fwrite(storage->keys, sizeof(CryptoKey), storage->count, file);
+
+    fclose(file);
+    printf("[로그] 키 정보가 keys.bin에 저장되었습니다.\n");
+}
+
+void free_storage(KeyStorage *storage) {
+    if (!storage) return;
+    for (int i = 0; i < storage->count; i++) {
+        free(storage->keys[i].secret_key);
+    }
+    free(storage->keys);
+    free(storage);
+    printf("\n로그: 모든 메모리가 안전하게 소거되었습니다.\n");
 }
