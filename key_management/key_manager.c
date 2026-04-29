@@ -34,8 +34,8 @@ int add_key(KeyStorage *storage, int id, const char *label, const char *secret) 
     strncpy(k->label, label, 31);
     k->label[31] = '\0';
 
-    k->secret_key = (char *)malloc(strlen(secret) + 1);
-    strcpy(k->secret_key, secret);
+    strncpy(k->secret_key, secret, 63);
+    k->secret_key[63] = '\0';
 
     storage->count++;
     return 0;

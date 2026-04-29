@@ -6,7 +6,7 @@
 typedef struct {
     int id;
     char label[32];
-    char *secret_key;
+    char secret_key[64];
 } CryptoKey;
 
 typedef struct {
