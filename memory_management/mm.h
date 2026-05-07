@@ -1,14 +1,13 @@
-#include <cstdint>
-
+#include <stdint.h>
 // #define MM_MAX_STRUCT_NAME (SYSTEM_PAGE_SIZE - sizeof(vm_page_for_families_t *)) / sizeof(vm_page_family_t)
 #define MM_MAX_STRUCT_NAME 64
 
 typedef struct vm_page_family {
     char struct_name[MM_MAX_STRUCT_NAME];
     uint32_t struct_size;
-} vm_page_family_t;
+} vm_page_for_family_t;
 
 typedef struct vm_page_for_families {
     struct vm_page_for_families *next;
-    vm_page_family_t vm_page_family[0];
+    vm_page_for_family_t vm_page_family[0];
 } vm_page_for_families_t;
