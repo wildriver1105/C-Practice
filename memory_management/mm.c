@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <memory.h>
 #include <unistd.h>
+#include <assert.h>
 #include <sys/mman.h>
 #include "mm.h"
+
 
 static vm_page_for_families_t *first_vm_page_for_families = NULL;
 static size_t SYSTEM_PAGE_SIZE = 0;
@@ -45,6 +47,29 @@ void mm_instantiate_new_page_family(char *struct_name, uint32_t struct_size) {
         first_vm_page_for_families->vm_page_family[0].struct_size = struct_size;
         return;
     }
+
+    uint32_t count = 0;
+
+    ITERATE_PAGE_FAMILES_BEGIN(first_vm_page_for_families, vm_page_family_curr) {
+        if (strcmp(vm_page_family_curr->struct_name, struct_name) == 0) {
+            printf("Error: Struct name already exists\n");
+            return;
+        }
+        assert(0);
+    } ITERATE_PAGE_FAMILES_END(first_vm_page_for_families, vm_page_for_families_curr);
+    
+    
+    if (count == MAX_FAMILIES_PER_VM_PAGE) {
+        new_vm_page_for_families = (vm_page_for_families_t *)mm_get_new_vm_page_from_kernel(1);
+        new_vm_page_for_families->next = first_vm_page_for_families;
+        first_vm_page_for_families = new_vm_page_for_families;
+        vm_page_family_curr = &first_vm_page_for_families->vm_page_family[0];
+    }
+
+    strncpy(vm_page_family_curr->struct_name, struct_name, MM_MAX_STRUCT_NAME);
+    vm_page_family_curr->struct_size = struct_size;
+    vm_page_family_curr->first_page = NULL;
+    return;
 }
 
 int main(int argc, char **argv) {
