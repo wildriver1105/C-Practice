@@ -11,3 +11,11 @@ typedef struct vm_page_for_families_ {
     struct vm_page_for_families *next;
     vm_page_for_family_t vm_page_family[0];
 } vm_page_for_families_t;
+
+typedef struct block_meta_data_ {
+    vm_bool_t is_free;
+    uint32_t block_size;
+    uint32_t offset;
+    struct block_meta_data_ *prev_block;
+    struct block_meta_data_ *next_block;
+} block_meta_data_t;
