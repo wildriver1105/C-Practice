@@ -12,6 +12,12 @@
 
 #define PREV_META_BLOCK(block_meta_data_ptr) (block_meta_data_ptr->prev_block)
 
+#define mm_bind_blocks_for_allocation(allocated_meta_block, free_meta_block)
+
+#define ITERATE_PAGE_FAMILIES_BEGIN(first_vm_page_for_families, vm_page_family_curr) for (vm_page_family_curr = first_vm_page_for_families->vm_page_family; vm_page_family_curr < &first_vm_page_for_families->vm_page_family[MAX_FAMILIES_PER_VM_PAGE]; vm_page_family_curr++)
+
+#define ITERATE_PAGE_FAMILIES_END(first_vm_page_for_families, vm_page_family_curr)
+
 typedef enum {
     MM_FALSE,
     MM_TRUE
