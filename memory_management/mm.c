@@ -50,13 +50,13 @@ void mm_instantiate_new_page_family(char *struct_name, uint32_t struct_size) {
 
     uint32_t count = 0;
 
-    ITERATE_PAGE_FAMILES_BEGIN(first_vm_page_for_families, vm_page_family_curr) {
+    ITERATE_PAGE_FAMILIES_BEGIN(first_vm_page_for_families, vm_page_family_curr) {
         if (strcmp(vm_page_family_curr->struct_name, struct_name) == 0) {
             printf("Error: Struct name already exists\n");
             return;
         }
         assert(0);
-    } ITERATE_PAGE_FAMILES_END(first_vm_page_for_families, vm_page_for_families_curr);
+    } ITERATE_PAGE_FAMILIES_END(first_vm_page_for_families, vm_page_for_families_curr);
     
     
     if (count == MAX_FAMILIES_PER_VM_PAGE) {
