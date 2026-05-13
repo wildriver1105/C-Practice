@@ -2,6 +2,16 @@
 // #define MM_MAX_STRUCT_NAME (SYSTEM_PAGE_SIZE - sizeof(vm_page_for_families_t *)) / sizeof(vm_page_family_t)
 #define MM_MAX_STRUCT_NAME 64
 
+#define offset_of(container_structure, field_name) ((size_t) &((container_structure *)0)->field_name)
+
+#define MM_GET_PAGE_FROM_META_BLOCK(block_meta_data_ptr) ((void *)((char *)block_meta_data_ptr - block_meta_data_ptr->offset))
+
+#define NEXT_META_BLOCK(block_meta_data_ptr) (block_meta_data_ptr->next_block)
+
+#define NEXT_META_BLOCK_BY_SIZE(block_meta_data_ptr) (block_meta_data_t *)((char *) (block_meta_data_ptr + 1) + block_meta_data_ptr->block_size)
+
+#define PREV_META_BLOCK(block_meta_data_ptr) (block_meta_data_ptr->prev_block)
+
 typedef enum {
     MM_FALSE,
     MM_TRUE
